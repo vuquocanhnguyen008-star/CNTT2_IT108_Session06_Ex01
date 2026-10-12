@@ -1,0 +1,14 @@
+Bài 1: Kiểm tra File Log Máy chủ Dung Lượng Lớn
+Phần 1: Phân tích
+Lý do lệnh cat hiển thị quá nhiều dữ liệu và không nên mở file 500MB bằng Notepad:
+
+Lệnh cat trong PowerShell (alias của Get-Content) mặc định đọc toàn bộ dữ liệu file và xả tràn ra terminal một lúc, gây đơ/treo màn hình khi file quá lớn.
+
+Notepad là phần mềm đọc văn bản đơn giản, cố gắng nạp toàn bộ 500MB file vào bộ nhớ RAM cùng lúc, gây quá tải làm ứng dụng rơi vào trạng thái không phản hồi (Not Responding).
+
+Phần 2: Hoàn thiện
+Lệnh PowerShell xem toàn bộ file theo từng trang (từng màn hình):
+Get-Content server_log_500MB.log | more
+
+Lệnh PowerShell chỉ xem 10 dòng cuối cùng:
+Get-Content server_log_500MB.log -Tail 10
